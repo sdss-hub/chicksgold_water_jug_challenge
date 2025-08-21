@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaterJugChallenge", "WaterJugChallenge\WaterJugChallenge.csproj", "{C0B919FA-2367-4A00-885B-C051A87EE6F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaterJugChallenge.Tests", "WaterJugChallenge.Tests\WaterJugChallenge.Tests.csproj", "{7565BAF7-CD2C-444E-83F7-9AD7A016CD3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,18 @@ Global
 		{C0B919FA-2367-4A00-885B-C051A87EE6F9}.Release|x64.Build.0 = Release|Any CPU
 		{C0B919FA-2367-4A00-885B-C051A87EE6F9}.Release|x86.ActiveCfg = Release|Any CPU
 		{C0B919FA-2367-4A00-885B-C051A87EE6F9}.Release|x86.Build.0 = Release|Any CPU
+		{7565BAF7-CD2C-444E-83F7-9AD7A016CD3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7565BAF7-CD2C-444E-83F7-9AD7A016CD3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7565BAF7-CD2C-444E-83F7-9AD7A016CD3F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7565BAF7-CD2C-444E-83F7-9AD7A016CD3F}.Debug|x64.Build.0 = Debug|Any CPU
+		{7565BAF7-CD2C-444E-83F7-9AD7A016CD3F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7565BAF7-CD2C-444E-83F7-9AD7A016CD3F}.Debug|x86.Build.0 = Debug|Any CPU
+		{7565BAF7-CD2C-444E-83F7-9AD7A016CD3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7565BAF7-CD2C-444E-83F7-9AD7A016CD3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7565BAF7-CD2C-444E-83F7-9AD7A016CD3F}.Release|x64.ActiveCfg = Release|Any CPU
+		{7565BAF7-CD2C-444E-83F7-9AD7A016CD3F}.Release|x64.Build.0 = Release|Any CPU
+		{7565BAF7-CD2C-444E-83F7-9AD7A016CD3F}.Release|x86.ActiveCfg = Release|Any CPU
+		{7565BAF7-CD2C-444E-83F7-9AD7A016CD3F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
