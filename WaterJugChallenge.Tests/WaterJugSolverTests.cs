@@ -1,6 +1,7 @@
 using Xunit;
 using FluentAssertions;
 using WaterJugChallenge.Services;
+using WaterJugChallenge.Models;
 
 namespace WaterJugChallenge.Tests;
 
