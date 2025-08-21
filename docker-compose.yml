@@ -21,14 +21,6 @@ services:
     networks:
       - waterjug-network
 
-  # Optional: Add Redis for distributed caching in production scaling
-  # redis:
-  #   image: redis:7-alpine
-  #   ports:
-  #     - "6379:6379"
-  #   restart: unless-stopped
-  #   networks:
-  #     - waterjug-network
 
 networks:
   waterjug-network:
