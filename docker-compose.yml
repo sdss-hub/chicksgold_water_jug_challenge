@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  water-jug-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+      - "8443:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - waterjug-network
+
+  # Optional: Add Redis for distributed caching in production scaling
+  # redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "6379:6379"
+  #   restart: unless-stopped
+  #   networks:
+  #     - waterjug-network
+
+networks:
+  waterjug-network:
+    driver: bridge
+
+# Example usage:
+# docker-compose up --build
+# API available at: http://localhost:8080
