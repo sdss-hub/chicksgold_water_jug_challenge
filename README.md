@@ -1,14 +1,5 @@
 # Water Jug Challenge API
 
-A C# .NET 8 Web API solution for the classic Water Jug Riddle that finds the optimal sequence of steps to measure exactly Z gallons using two jugs of capacities X and Y gallons.
-
-
-##  Quick Start
-
-### Prerequisites
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-- Visual Studio 2022, VS Code, or any .NET-compatible IDE
-
 ### Setup & Run
 
 1. **Clone the repository:**
