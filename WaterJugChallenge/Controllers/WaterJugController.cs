@@ -44,6 +44,11 @@ public class WaterJugController : ControllerBase
                     Message = "Invalid input parameters",
                     ValidationErrors = validationResult.Errors.Select(e => e.ErrorMessage).ToList()
                 };
+                
+                _logger.LogWarning("Validation failed for water jug problem: X={X}, Y={Y}, Z={Z}. Errors: {Errors}", 
+                    request.XCapacity, request.YCapacity, request.ZAmountWanted, 
+                    string.Join("; ", validationResult.Errors.Select(e => e.ErrorMessage)));
+                
                 return BadRequest(errorResponse);
             }
 
@@ -51,15 +56,27 @@ public class WaterJugController : ControllerBase
 
             if (_cache.TryGetValue(cacheKey, out WaterJugResponse? cachedResult) && cachedResult != null)
             {
-                _logger.LogInformation("Serving cached result for {CacheKey}", cacheKey);
+                _logger.LogInformation("Serving cached result for X={X}, Y={Y}, Z={Z}. Solvable: {IsSolvable}", 
+                    request.XCapacity, request.YCapacity, request.ZAmountWanted, cachedResult.IsSolvable);
                 cachedResult.FromCache = true;
                 return Ok(cachedResult);
             }
 
-            _logger.LogInformation("Solving water jug problem: X={X}, Y={Y}, Z={Z}", 
+            _logger.LogInformation("Attempting to solve water jug problem: X={X}, Y={Y}, Z={Z}", 
                 request.XCapacity, request.YCapacity, request.ZAmountWanted);
 
             var result = _solver.Solve(request.XCapacity, request.YCapacity, request.ZAmountWanted);
+
+            if (result.IsSolvable)
+            {
+                _logger.LogInformation("Water jug problem solved successfully: X={X}, Y={Y}, Z={Z}. Steps: {TotalSteps}", 
+                    request.XCapacity, request.YCapacity, request.ZAmountWanted, result.TotalSteps);
+            }
+            else
+            {
+                _logger.LogInformation("Water jug problem has no solution: X={X}, Y={Y}, Z={Z}. Reason: {Message}", 
+                    request.XCapacity, request.YCapacity, request.ZAmountWanted, result.Message);
+            }
 
             var cacheOptions = new MemoryCacheEntryOptions
             {
@@ -68,14 +85,13 @@ public class WaterJugController : ControllerBase
             };
             _cache.Set(cacheKey, result, cacheOptions);
 
-            _logger.LogInformation("Problem solved successfully. Solvable: {IsSolvable}, Steps: {TotalSteps}", 
-                result.IsSolvable, result.TotalSteps);
-
             return Ok(result);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while solving water jug problem");
+            _logger.LogError(ex, "Unexpected error occurred while solving water jug problem: X={X}, Y={Y}, Z={Z}", 
+                request.XCapacity, request.YCapacity, request.ZAmountWanted);
+                
             var errorResponse = new ErrorResponse
             {
                 Error = "Internal server error",
@@ -84,12 +100,12 @@ public class WaterJugController : ControllerBase
             return StatusCode(500, errorResponse);
         }
     }
-
-
     [HttpGet("info")]
     [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
     public ActionResult GetApiInfo()
     {
+        _logger.LogInformation("API info requested");
+        
         return Ok(new
         {
             Name = "Water Jug Challenge API",

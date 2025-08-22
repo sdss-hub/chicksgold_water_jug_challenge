@@ -1,9 +1,13 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace WaterJugChallenge.Models;
 
 public class WaterJugRequest
 {
     public int XCapacity { get; set; }
     public int YCapacity { get; set; }
+
+    [Required(ErrorMessage = "Target amount is required")]
     public int ZAmountWanted { get; set; }
 }
 
